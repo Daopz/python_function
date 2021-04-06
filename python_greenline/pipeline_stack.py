@@ -16,7 +16,7 @@ class PipelineStack(cdk.Stack):
         source_artifact = codepipeline.Artifact()
         cloud_assembly_artifact = codepipeline.Artifact()
 
-        pipeline = pipelines.CdkPipeline(self, 'Pipeline',
+        pipelines.CdkPipeline(self, 'Pipeline',
           cloud_assembly_artifact=cloud_assembly_artifact,
           pipeline_name='GrennlinePipeline',
 
@@ -25,6 +25,7 @@ class PipelineStack(cdk.Stack):
             output=source_artifact,
             oauth_token=core.SecretValue.secrets_manager('python_token'),
             owner='Daopz',
+            branch='main',
             repo='python_function',
             trigger=cpactions.GitHubTrigger.POLL),
 
@@ -33,3 +34,5 @@ class PipelineStack(cdk.Stack):
           cloud_assembly_artifact=cloud_assembly_artifact,
           install_command='npm install -g aws-cdk && pip install -r requirements.txt',
           synth_command='cdk synth'))
+
+
