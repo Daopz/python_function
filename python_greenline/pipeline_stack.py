@@ -24,7 +24,7 @@ class PipelineStack(cdk.Stack):
             action_name='GitHub',
             output=source_artifact,
             oauth_token=core.SecretValue.secrets_manager('python_token'),
-            owner='daopz',
+            owner='Daopz',
             repo='python_function',
             trigger=cpactions.GitHubTrigger.POLL),
 
