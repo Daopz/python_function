@@ -1,4 +1,5 @@
 from aws_cdk import core
+from aws_cdk import core as cdk
 from aws_cdk import aws_codepipeline as codepipeline
 from aws_cdk import aws_codepipeline_actions as cpactions
 from aws_cdk import pipelines
@@ -7,7 +8,7 @@ from aws_cdk import pipelines
 
 #APP_ACCOUNT = '507856266964'
 
-class PipelineStack(core.Stack):
+class PipelineStack(cdk.Stack):
 
     def __init__(self, scope: core.Construct, id: str, **kwargs):
         super().__init__(scope, id, **kwargs)
@@ -15,17 +16,17 @@ class PipelineStack(core.Stack):
         source_artifact = codepipeline.Artifact()
         cloud_assembly_artifact = codepipeline.Artifact()
 
-        pipelines.CdkPipeline(self, 'Pipeline',
+        pipeline = pipelines.CdkPipeline(self, 'Pipeline',
           cloud_assembly_artifact=cloud_assembly_artifact,
           pipeline_name='GrennlinePipeline',
 
-        source_action=cpactions.GitHubSourceAction(
-          action_name='GitHub',
-          output=source_artifact,
-          oauth_token=core.SecretValue.secrets_manager('python_token'),
-          owner='daopz',
-          repo='python_function',
-          trigger=cpactions.GitHubTrigger.POLL),
+          source_action=cpactions.GitHubSourceAction(
+            action_name='GitHub',
+            output=source_artifact,
+            oauth_token=core.SecretValue.secrets_manager('python_token'),
+            owner='daopz',
+            repo='python_function',
+            trigger=cpactions.GitHubTrigger.POLL),
 
         synth_action=pipelines.SimpleSynthAction(
           source_artifact=source_artifact,
