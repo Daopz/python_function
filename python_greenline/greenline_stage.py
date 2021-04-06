@@ -8,4 +8,4 @@ class GrennlineServiceStage(core.Stage):
 
     service = PythonGreenlineStack(self, 'GreenlineService')
 
-    self.url_output = service.url_output
+    
