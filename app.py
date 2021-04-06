@@ -7,7 +7,7 @@ from python_greenline.pipeline_stack import PipelineStack
 PIPELINE_ACCOUNT = '507856266964'
 
 app = core.App()
-PythonGreenlineStack(app, "python_greenline")
+PythonGreenlineStack(app, "PythonGreenlineStack")
 
 PipelineStack(app, "PipelineStack", env={
   'account': PIPELINE_ACCOUNT,
