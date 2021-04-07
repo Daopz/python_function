@@ -6,7 +6,7 @@ from aws_cdk import pipelines
 
 from .greenline_stage import GrennlineServiceStage
 
-APP_ACCOUNT = '507856266964'
+APP_ACCOUNT = '0123456789012'
 
 class PipelineStack(cdk.Stack):
 
@@ -23,10 +23,10 @@ class PipelineStack(cdk.Stack):
       source_action=cpactions.GitHubSourceAction(
         action_name='GitHub',
         output=source_artifact,
-        oauth_token=core.SecretValue.secrets_manager('python_token'),
-        owner='Daopz',
+        oauth_token=core.SecretValue.secrets_manager('Oauth-Token-XXXX'), # Valid Oauth token must put here
+        owner='XXXX', #OwnerRepo
         branch='main',
-        repo='python_function',
+        repo='XXXX', #Name of the Repo
         trigger=cpactions.GitHubTrigger.POLL),
 
       synth_action=pipelines.SimpleSynthAction(

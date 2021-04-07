@@ -4,7 +4,7 @@ from aws_cdk import core
 from python_greenline.python_greenline_stack import PythonGreenlineStack
 from python_greenline.pipeline_stack import PipelineStack
 
-PIPELINE_ACCOUNT = '507856266964'
+PIPELINE_ACCOUNT = '0123456789012'
 
 app = core.App()
 
