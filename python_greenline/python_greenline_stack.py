@@ -16,7 +16,6 @@ class PythonGreenlineStack(cdk.Stack):
     def __init__(self, scope: cdk.Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        # The code that defines your stack goes here
         this_dir = path.dirname(__file__)
 
         queue = sqs.Queue(self, "Queue")
@@ -26,7 +25,7 @@ class PythonGreenlineStack(cdk.Stack):
             handler="handler.handler",
             code=lambda_.Code.from_asset(path.join(this_dir, 'lambda')),
             dead_letter_queue=queue,
-            max_event_age=cdk.Duration.hours(2), # Otional: set the maxEventAge retry policy
+            max_event_age=cdk.Duration.hours(2), 
             retry_attempts=2
             )
         
